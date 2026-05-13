@@ -68,7 +68,7 @@ export default function Home() {
     }
   };
 
-  const fullText = "Driving Digital Transformation in the Chemical Industry";
+  const fullText = "Driving Digital Transformation in the\nChemical Industry";
   const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {
@@ -77,40 +77,43 @@ export default function Home() {
       setDisplayText(fullText.slice(0, i + 1));
       i++;
       if (i >= fullText.length) clearInterval(interval);
-    }, 50);
+    }, 40); // Slightly faster for better feel
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* HERO SECTION WITH IMAGE */}
-      <div className="relative w-full h-[220px] sm:h-[300px] md:h-[350px] text-white">
+      {/* HERO SECTION */}
+      <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] flex items-end overflow-hidden">
         {/* Background Image */}
         <Image
-          src="/images/webinar-banner-v2.png.png"
+          src="/images/webinar-banner-v3.png"
           alt="Webinar Banner"
           fill
           priority
-          className="object-cover"
+          className="object-cover object-top"
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-white/20" />
 
-        {/* Content */}
-        <div className="relative w-full px-6 sm:px-12 md:px-20 py-8 sm:py-12 flex items-end h-full">
-          <div className="w-full md:w-3/4 lg:w-2/3">
-            {/* <div className="inline-flex items-center px-3 py-1 bg-blue-600/90 backdrop-blur-sm text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 rounded">
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              Live Webinar
-            </div> */}
-            <h1 className="text-xl sm:text-3xl md:text-4xl font-semibold leading-tight text-black min-h-[1.5em]">
+        {/* Heading Content Overlay */}
+        <div className="absolute bottom-0 left-0 w-full px-4 sm:px-8 md:px-12 pb-6 sm:pb-8 md:pb-10">
+          <div className="max-w-3xl">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold leading-[1.3] text-gray-900 tracking-tight whitespace-pre-line">
               {displayText}
-              {displayText.length < fullText.length && (
-                <span className="inline-block w-[2px] h-[0.8em] bg-black ml-1 animate-pulse"></span>
-              )}
+              <span 
+                className={`inline-block w-[3px] h-[0.9em] bg-blue-600 ml-1.5 align-middle transition-opacity duration-100 ${
+                  displayText.length === fullText.length ? 'animate-none opacity-0' : 'animate-pulse'
+                }`}
+              ></span>
             </h1>
-            <div className="h-1.5 bg-blue-500 mt-6 rounded-full animate-grow-line" style={{ width: displayText.length === fullText.length ? '6rem' : '0', transition: 'width 1s ease-out' }}></div>
+
+            <div
+              className="h-1 bg-blue-600 mt-4 sm:mt-6 rounded-full"
+              style={{
+                width: displayText.length === fullText.length ? "80px" : "0",
+                transition: "width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
+              }}
+            ></div>
           </div>
         </div>
       </div>
@@ -160,25 +163,9 @@ export default function Home() {
               Key strategies to strengthen financial planning and control.
             </li>
           </ul>
-
-          {/* <div className="mt-6">
-            <p className="font-semibold text-black text-sm sm:text-base">
-              Speaker:
-            </p>
-            <p className="text-gray-600 text-sm sm:text-base">
-              To be announced
-            </p>
-          </div>
-
-          <a
-            href="#form"
-            className="inline-block mt-4 text-blue-700 underline md:hidden"
-          >
-            Register Now ↓
-          </a> */}
         </div>
 
-        {/* RIGHT FORM */}
+        {/* RIGHT FORM (UNCHANGED) */}
         <div
           id="form"
           className="bg-white p-6 sm:p-8 shadow-2xl rounded-2xl border border-gray-100 h-fit sticky top-8"
@@ -195,7 +182,7 @@ export default function Home() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1 ml-1">
+                <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
                   First Name
                 </label>
                 <input
@@ -203,7 +190,7 @@ export default function Home() {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  placeholder="John"
+                  //placeholder="John"
                   className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
                 />
                 {errors.firstName && (
@@ -214,7 +201,7 @@ export default function Home() {
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1 ml-1">
+                <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
                   Last Name
                 </label>
                 <input
@@ -222,7 +209,7 @@ export default function Home() {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  placeholder="Doe"
+                  //placeholder="Doe"
                   className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
                 />
                 {errors.lastName && (
@@ -234,7 +221,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1 ml-1">
+              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
                 Work Email
               </label>
               <input
@@ -242,7 +229,7 @@ export default function Home() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="john@company.com"
+                //placeholder="john@company.com"
                 className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
               />
               {errors.email && (
@@ -253,7 +240,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1 ml-1">
+              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
                 Phone Number
               </label>
               <input
@@ -261,7 +248,7 @@ export default function Home() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+91 98765 43210"
+                //placeholder="+91 98765 43210"
                 className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
               />
               {errors.phone && (
@@ -272,7 +259,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1 ml-1">
+              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
                 Company Name
               </label>
               <input
@@ -280,7 +267,7 @@ export default function Home() {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Acme Corp"
+                //placeholder="Acme Corp"
                 className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
               />
               {errors.company && (
@@ -291,14 +278,14 @@ export default function Home() {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1 ml-1">
+              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
                 Key Discussion Points
               </label>
               <textarea
                 name="discussion"
                 value={formData.discussion}
                 onChange={handleChange}
-                placeholder="What would you like to learn?"
+                //placeholder="What would you like to learn?"
                 rows={3}
                 className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30 resize-none"
               />
