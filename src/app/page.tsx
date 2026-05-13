@@ -1,4 +1,66 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
+  const [errors, setErrors] = useState<any>({});
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    discussion: "",
+  });
+
+  const handleChange = (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validate = () => {
+    let newErrors: any = {};
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+    ) {
+      newErrors.email = "Invalid email address";
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    }
+
+    if (!formData.company.trim()) {
+      newErrors.company = "Company name is required";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      console.log("Form submitted:", formData);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* HERO SECTION */}
@@ -14,7 +76,7 @@ export default function Home() {
 
       {/* MAIN SECTION */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 grid md:grid-cols-2 gap-8 md:gap-10">
-        {/* LEFT CONTENT (comes first naturally) */}
+        {/* LEFT CONTENT (unchanged) */}
         <div>
           <p className="text-sm sm:text-md font-semibold text-black mb-4">
             | May 26, 2026 &nbsp;&nbsp; 3:00 - 3:45 pm IST
@@ -58,16 +120,15 @@ export default function Home() {
             </li>
           </ul>
 
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <p className="font-semibold text-black text-sm sm:text-base">
               Speaker:
             </p>
             <p className="text-gray-600 text-sm sm:text-base">
               To be announced
             </p>
-          </div>
+          </div> */}
 
-          {/* Optional mobile CTA */}
           <a
             href="#form"
             className="inline-block mt-4 text-blue-700 underline md:hidden"
@@ -82,32 +143,85 @@ export default function Home() {
             Register Today
           </h2>
 
-          <form className="space-y-4 text-gray-800">
-            <input
-              type="text"
-              placeholder="First Name*"
-              className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <form onSubmit={handleSubmit} className="space-y-4 text-gray-800">
+            {/* First Name */}
+            <div>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name*"
+                className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.firstName && (
+                <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
+              )}
+            </div>
 
-            <input
-              type="text"
-              placeholder="Last Name*"
-              className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            {/* Last Name */}
+            <div>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name*"
+                className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.lastName && (
+                <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
+              )}
+            </div>
 
-            <input
-              type="email"
-              placeholder="Work Email*"
-              className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            {/* Email */}
+            <div>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Work Email*"
+                className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
+            </div>
+            {/* Phone */}
+            <div>
+              <input
+                type="number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Phone Number*"
+                className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+              )}
+            </div>
+            {/* Company */}
+            <div>
+              <input
+                type="text"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                placeholder="Company Name*"
+                className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.company && (
+                <p className="text-red-500 text-xs mt-1">{errors.company}</p>
+              )}
+            </div>
 
-            <input
-              type="text"
-              placeholder="Company Name*"
-              className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
+            {/* Discussion */}
             <textarea
+              name="discussion"
+              value={formData.discussion}
+              onChange={handleChange}
               placeholder="Key Discussion Points"
               rows={4}
               className="w-full border border-gray-300 px-3 py-3 text-sm rounded outline-none focus:ring-2 focus:ring-blue-500"
