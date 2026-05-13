@@ -41,6 +41,9 @@ export default function Home() {
 
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
+    } else if (!/^\+[1-9]\d{7,14}$/.test(formData.phone)) {
+      newErrors.phone =
+        "Enter valid phone number with country code (e.g. +919876543210)";
     }
 
     if (!formData.company.trim()) {
@@ -129,12 +132,12 @@ export default function Home() {
             </p>
           </div> */}
 
-          <a
+          {/* <a
             href="#form"
             className="inline-block mt-4 text-blue-700 underline md:hidden"
           >
             Register Now ↓
-          </a>
+          </a> */}
         </div>
 
         {/* RIGHT FORM */}
