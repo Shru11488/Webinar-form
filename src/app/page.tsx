@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -68,6 +68,19 @@ export default function Home() {
     }
   };
 
+  const fullText = "Driving Digital Transformation in the Chemical Industry";
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayText(fullText.slice(0, i + 1));
+      i++;
+      if (i >= fullText.length) clearInterval(interval);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* HERO SECTION WITH IMAGE */}
@@ -85,16 +98,19 @@ export default function Home() {
         <div className="absolute inset-0 bg-white/20" />
 
         {/* Content */}
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex items-end h-full">
+        <div className="relative w-full px-6 sm:px-12 md:px-20 py-8 sm:py-12 flex items-end h-full">
           <div className="w-full md:w-3/4 lg:w-2/3">
             {/* <div className="inline-flex items-center px-3 py-1 bg-blue-600/90 backdrop-blur-sm text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 rounded">
               <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
               Live Webinar
             </div> */}
-            <h1 className="text-xl sm:text-3xl md:text-4xl font-semibold leading-tight text-black">
-              Driving Digital Transformation in the Chemical Industry
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-semibold leading-tight text-black min-h-[1.5em]">
+              {displayText}
+              {displayText.length < fullText.length && (
+                <span className="inline-block w-[2px] h-[0.8em] bg-black ml-1 animate-pulse"></span>
+              )}
             </h1>
-            <div className="h-1.5 w-24 bg-blue-500 mt-6 rounded-full"></div>
+            <div className="h-1.5 bg-blue-500 mt-6 rounded-full animate-grow-line" style={{ width: displayText.length === fullText.length ? '6rem' : '0', transition: 'width 1s ease-out' }}></div>
           </div>
         </div>
       </div>
