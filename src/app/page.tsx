@@ -68,7 +68,7 @@ export default function Home() {
     }
   };
 
-  const fullText = "Driving Digital Transformation in the\nChemical Industry";
+  const fullText = "Driving Digital Transformation \nin the Chemical Industry";
   const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {
@@ -82,33 +82,51 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50">
+      {/* WHITE NAVBAR ABOVE BANNER */}
+      <nav className="bg-white w-full border-b border-gray-100 z-50">
+        <div className="px-4 sm:px-6 md:px-8 py-3 flex items-center">
+          <div className="relative w-32 sm:w-40 h-10 sm:h-12">
+            <Image
+              src="/images/Dextero.png"
+              alt="Dextero Logo"
+              fill
+              className="object-contain object-left"
+            />
+          </div>
+        </div>
+      </nav>
+
       {/* HERO SECTION */}
-      <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] flex items-end overflow-hidden">
+      <div className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] flex items-end overflow-hidden">
+        {/* Dark Overlay for readability */}
+        <div className="absolute inset-0 bg-black/35 z-[1]"></div>
+
         {/* Background Image */}
         <Image
-          src="/images/webinar-banner-v3.png"
+          src="/images/webinar Banner.png"
           alt="Webinar Banner"
           fill
           priority
           className="object-cover object-top"
         />
 
-
         {/* Heading Content Overlay */}
-        <div className="absolute bottom-0 left-0 w-full px-4 sm:px-8 md:px-12 pb-6 sm:pb-8 md:pb-10">
-          <div className="max-w-3xl">
-            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold leading-[1.3] text-gray-900 tracking-tight whitespace-pre-line">
+        <div className="absolute bottom-0 left-0 w-full px-4 sm:px-8 md:px-12 pb-8 sm:pb-10 md:pb-12 z-10">
+          <div className="max-w-4xl">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-heading font-semibold leading-[1.2] text-white tracking-tight whitespace-pre-line drop-shadow-md">
               {displayText}
-              <span 
-                className={`inline-block w-[3px] h-[0.9em] bg-blue-600 ml-1.5 align-middle transition-opacity duration-100 ${
-                  displayText.length === fullText.length ? 'animate-none opacity-0' : 'animate-pulse'
+              <span
+                className={`inline-block w-[3px] h-[0.9em] bg-blue-400 ml-2 align-middle transition-opacity duration-100 ${
+                  displayText.length === fullText.length
+                    ? "animate-none opacity-0"
+                    : "animate-pulse"
                 }`}
               ></span>
             </h1>
 
             <div
-              className="h-1 bg-blue-600 mt-4 sm:mt-6 rounded-full"
+              className="h-1 bg-blue-400 mt-4 sm:mt-6 rounded-full shadow-lg shadow-blue-500/30"
               style={{
                 width: displayText.length === fullText.length ? "80px" : "0",
                 transition: "width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
@@ -121,7 +139,7 @@ export default function Home() {
       {/* MAIN SECTION */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 grid md:grid-cols-2 gap-8 md:gap-10">
         {/* LEFT CONTENT */}
-        <div>
+        <div className="">
           <p className="text-sm sm:text-md font-semibold text-black mb-4">
             | May 26, 2026 &nbsp;&nbsp; 3:00 - 3:45 pm IST
           </p>
@@ -165,24 +183,24 @@ export default function Home() {
           </ul>
         </div>
 
-        {/* RIGHT FORM (UNCHANGED) */}
+        {/* RIGHT FORM */}
         <div
           id="form"
-          className="bg-white p-6 sm:p-8 shadow-2xl rounded-2xl border border-gray-100 h-fit sticky top-8"
+          className="bg-white p-6 sm:p-10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.08)] rounded-[2.5rem] border border-gray-100 h-fit sticky top-12"
         >
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">
+          <div className="mb-8">
+            <h2 className="text-3xl font-heading font-bold text-gray-900 mb-2">
               Register Today
             </h2>
-            <p className="text-gray-500 text-sm">
-              Fill in the details to secure your spot.
+            <p className="text-gray-500 text-sm font-medium">
+              Join us to transform your business future.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-2 gap-5">
               <div>
-                <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
+                <label className="block text-[11px] uppercase font-bold text-gray-400 mb-1.5 ml-1 tracking-wider">
                   First Name
                 </label>
                 <input
@@ -190,18 +208,18 @@ export default function Home() {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  //placeholder="John"
-                  className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
+                  placeholder="John"
+                  className="w-full border border-gray-100 px-4 py-3.5 text-black text-sm rounded-xl outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all bg-gray-50/50 placeholder:text-gray-300"
                 />
                 {errors.firstName && (
-                  <p className="text-red-500 text-[10px] mt-1 ml-1">
+                  <p className="text-red-500 text-[10px] mt-1.5 ml-1">
                     {errors.firstName}
                   </p>
                 )}
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
+                <label className="block text-[11px] uppercase font-bold text-gray-400 mb-1.5 ml-1 tracking-wider">
                   Last Name
                 </label>
                 <input
@@ -209,11 +227,11 @@ export default function Home() {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  //placeholder="Doe"
-                  className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
+                  placeholder="Doe"
+                  className="w-full border border-gray-100 px-4 py-3.5 text-black text-sm rounded-xl outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all bg-gray-50/50 placeholder:text-gray-300"
                 />
                 {errors.lastName && (
-                  <p className="text-red-500 text-[10px] mt-1 ml-1">
+                  <p className="text-red-500 text-[10px] mt-1.5 ml-1">
                     {errors.lastName}
                   </p>
                 )}
@@ -221,7 +239,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
+              <label className="block text-[11px] uppercase font-bold text-gray-400 mb-1.5 ml-1 tracking-wider">
                 Work Email
               </label>
               <input
@@ -229,18 +247,18 @@ export default function Home() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                //placeholder="john@company.com"
-                className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
+                placeholder="john@company.com"
+                className="w-full border border-gray-100 px-4 py-3.5 text-black text-sm rounded-xl outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all bg-gray-50/50 placeholder:text-gray-300"
               />
               {errors.email && (
-                <p className="text-red-500 text-[10px] mt-1 ml-1">
+                <p className="text-red-500 text-[10px] mt-1.5 ml-1">
                   {errors.email}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
+              <label className="block text-[11px] uppercase font-bold text-gray-400 mb-1.5 ml-1 tracking-wider">
                 Phone Number
               </label>
               <input
@@ -248,18 +266,18 @@ export default function Home() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                //placeholder="+91 98765 43210"
-                className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
+                placeholder="+91 98765 43210"
+                className="w-full border border-gray-100 px-4 py-3.5 text-black text-sm rounded-xl outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all bg-gray-50/50 placeholder:text-gray-300"
               />
               {errors.phone && (
-                <p className="text-red-500 text-[10px] mt-1 ml-1">
+                <p className="text-red-500 text-[10px] mt-1.5 ml-1">
                   {errors.phone}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
+              <label className="block text-[11px] uppercase font-bold text-gray-400 mb-1.5 ml-1 tracking-wider">
                 Company Name
               </label>
               <input
@@ -267,33 +285,33 @@ export default function Home() {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                //placeholder="Acme Corp"
-                className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30"
+                placeholder="Acme Corp"
+                className="w-full border border-gray-100 px-4 py-3.5 text-black text-sm rounded-xl outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all bg-gray-50/50 placeholder:text-gray-300"
               />
               {errors.company && (
-                <p className="text-red-500 text-[10px] mt-1 ml-1">
+                <p className="text-red-500 text-[10px] mt-1.5 ml-1">
                   {errors.company}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">
+              <label className="block text-[11px] uppercase font-bold text-gray-400 mb-1.5 ml-1 tracking-wider">
                 Key Discussion Points
               </label>
               <textarea
                 name="discussion"
                 value={formData.discussion}
                 onChange={handleChange}
-                //placeholder="What would you like to learn?"
+                placeholder="What would you like to learn?"
                 rows={3}
-                className="w-full border border-gray-200 px-4 py-3 text-sm rounded-lg outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all bg-gray-50/30 resize-none"
+                className="w-full border border-gray-100 px-4 py-3.5 text-black text-sm rounded-xl outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all bg-gray-50/50 placeholder:text-gray-300 resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-4 text-sm font-bold uppercase tracking-widest rounded-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/25 active:scale-[0.98]"
+              className="w-full bg-blue-600 text-white py-4.5 text-sm font-bold uppercase tracking-[0.15em] rounded-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 active:scale-[0.98] mt-2"
             >
               Register Now
             </button>
